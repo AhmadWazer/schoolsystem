@@ -39,7 +39,7 @@
                             <th scope="row">{{ $value->id }}</th>
                             <td>{{ $value->name }}</td>
                             <td>{{ $value->email }}</td>
-                            <td style="color: {{ $value->role === 'admin' ? 'blue': ($value->role === 'teacher' ? 'amazon':
+                            <td style="color: {{ $value->role === 'admin' ? 'blue': ($value->role === 'teacher' ? 'red':
                                 ($value->role === 'student' ? 'orange' :  'purple')) }}">{{ $value->role }}</td>
                             <td style="color: {{ $value->status === 'pending' ? 'red' : 'green' }}">
                             {{ $value->status }}</td>

@@ -8,25 +8,15 @@
                     document.write(new Date().getFullYear());
                   </script>
                   , made with ❤️ by
-                  <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">ThemeSelection</a>
+                  <a href="https://" target="_blank" class="footer-link fw-bolder">AIMS</a>
                 </div>
                 <div>
-                  <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
-                  <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
+                  <a href="https://" class="footer-link me-4" target="_blank">Our Mision</a>
+                  <a href="https://" target="_blank" class="footer-link me-4">Achivements</a>
 
-                  <a
-                    href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                    target="_blank"
-                    class="footer-link me-4"
-                    >Documentation</a
-                  >
+                  <a href="https://" target="_blank" class="footer-link me-4" >About Us</a>
 
-                  <a
-                    href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                    target="_blank"
-                    class="footer-link me-4"
-                    >Support</a
-                  >
+                  <a href="https://" target="_blank" class="footer-link me-4" >Contact Us</a>
                 </div>
               </div>
             </footer>

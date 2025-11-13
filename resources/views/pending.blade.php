@@ -9,9 +9,9 @@
 <body class="bg-dark">
     <div class="card text-center mt-5 pt-5 pb-5 bg-info">
     <div class="card-body mt-5 mb-5 pt-5 pb-5">
-<h2 class="text-danger">Your Login Request Is Pending ...!</h2>
-<h4 class="text-danger">!................................!</h4>
-<h6 class="text-danger">Please Wait ...!</h6>
+<h2 class="">Your registration is Successfull, Make sure Your e-male Address is Correct & When We Active Your Account We Send an e-male on Your e-male Address </h2>
+<h4 class="text-danger">Please Wait until e-mail reseved</h4>
+<!-- <h6 class="text-danger">Please Wait ...!</h6> -->
 <a href="{{ route('logout') }}"
         onclick="event.preventDefault();
                       document.getElementById('logout-form').submit();" class="btn btn-primary">

@@ -11,6 +11,7 @@ use App\Http\Controllers\school\SubjectController;
 use App\Http\Controllers\school\UserController;
 use App\Http\Controllers\school\RoleparmisionController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +35,8 @@ Route::get('/studentattend/{id}', [HomeController::class, 'studentAtten'])->name
 Route::post('/studentattend', [HomeController::class, 'save'])->name('save.stdatten');
 
 Route::post('/studentData',[HomeController::class,'stdData']);
-Route::post('/studAttendanceA',[HomeController::class,'studAttendance']);
+Route::post('/studAttendanceA',[HomeController::class,'studAttendance']);//show attendance in teacher page
+Route::post('/studAttendanceP',[HomeController::class,'studAttendancesssssss']);//show attendance in parent page
 // user route
 Route::get('/useraccount', [UserController::class, 'index'])->name('useraccount.index');
 Route::get('/useraccount/add-new-useraccount', [UserController::class, 'create'])->name('useraccount.create');
@@ -54,9 +56,10 @@ Route::post('/student/update/{id}',[StudentController::class,'update'])->name('s
 Route::get('/student/delete/{id}',[StudentController::class,'delete'])->name('student.delete');
 Route::get('/student/datesheet',[StudentController::class,'datesheet'])->name('student.datesheet');
 Route::get('/student/showAttend',[StudentController::class,'showattend']);
-
 Route::post('/classdetails', [StudentController::class, 'stdatten'])->name('stdatten');
 Route::post('/getClassDetails', [StudentController::class, 'classDetails'])->name('getClassDetails');
+
+Route::post('/showstudentAttend', [StudentController::class, 'showStudentAttend'])->name('show_student_Attend');
 //teacher
 Route::get('/teacher',[TeacherController::class,'teacher'])->name('teacher');
 Route::get('/teacher/show/{id}',[TeacherController::class,'show'])->name('teacher.show');
@@ -85,6 +88,7 @@ Route::post('/searchAttendance',[AttendanceController::class,'searchattend']);
 Route::post('/subAttendance',[AttendanceController::class,'subAttend']);
 //class
 Route::get('/class',[ClassController::class,'class'])->name('class');
+Route::get('/class/show/{id}',[ClassController::class,'show'])->name('class.show');
 Route::get('/class/addedit',[ClassController::class,'addeditclass']);
 Route::post('/class/store',[ClassController::class,'store'])->name('class.store');
 Route::get('/class/update{id}',[ClassController::class,'edit'])->name('class.edit');
@@ -99,6 +103,7 @@ Route::post('/subject/update{id}',[SubjectController::class,'update'])->name('su
 Route::get('/subject/delete{id}',[SubjectController::class,'delete'])->name('subject.delete');
 //role & permission
 Route::get('/roleparmision',[RoleparmisionController::class,'roleparmision']);
+
 });
 
 // this route is for pending users

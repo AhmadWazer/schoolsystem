@@ -8,20 +8,29 @@ use App\Models\Classes;
 use App\Models\Teacher;
 use App\Models\Student;
 use App\Models\Subject;
+use App\Models\User;
 use DB;
 
 class ClassController extends Controller
 {
     public function class()
     { 
-        $cdata = Classes::get();
-        
-        return view('school.class')->with('cdata',$cdata);
+        $classes = Classes::get();
+        $teachers = User::where('role', '=', 'teacher')->get();
+
+        return view('school.class', compact('classes', 'teachers'));
     }
     public function addeditclass()
     {
-        // $tdata = Teacher::get();
-        return view('school.addeditclass');
+        // $subject = Subject::get();
+        $teachers = User::where('role', '=', 'teacher')->get();
+        return view('school.addeditclass', compact('teachers',));
+    }
+    public function show($id)
+    {
+        $show = Classes::findOrFail($id);
+        // dd($show);
+        return view('school.showclass')->with('show', $show);
     }
     public function store(Request $request)
     {
@@ -35,10 +44,12 @@ class ClassController extends Controller
     }
     public function edit($id)
     {
+        $subject = Subject::get();
         $cdata = Classes::findOrFail($id);
-        // $tdata = Teacher::get();
-        return view('school.addeditclass')->with('cdata',$cdata);
+        $teachers = User::where('role', '=', 'teacher')->get();
+        return view('school.addeditclass', compact('cdata', 'teachers','subject'));
     }
+
     public function update(Request $request, $id)
     {
         $cdata = Classes::findOrFail($id);
@@ -51,7 +62,7 @@ class ClassController extends Controller
     }
     public function delete($id)
     {
-        Classes::destory($id);
+        Classes::destroy($id);
         return redirect('class');
     }
 }

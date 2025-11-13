@@ -51,4 +51,14 @@ class User extends Authenticatable
         return $this->belongsTo(Attendance::class);
     }
 
+    //attendance
+     public function class()
+    {
+        return $this->belongsTo(Classes::class, 'class_id');
+    }
+
+    public function subjects()
+    {
+        return $this->hasMany(Subject::class, 'teacher_id');
+    }
 }

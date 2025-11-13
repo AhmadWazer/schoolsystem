@@ -12,7 +12,7 @@ class ParentController extends Controller
 {
     public function parent()
     {
-        $pdata = User::where('role','=','parant')->get();
+        $pdata = User::where('role', "=", 'parent')->get();
         
         return view('school.parent')->with('pdata',$pdata);
     }

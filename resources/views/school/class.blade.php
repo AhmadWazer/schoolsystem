@@ -25,7 +25,7 @@
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    @foreach($cdata as $class)
+                    @foreach($classes as $class)
                     @php
                     $classId = explode(',', $class->id);
                     @endphp
@@ -68,11 +68,15 @@
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
                                             <div class="d-flex">
-                                                <a class="dropdown-item" href="{{route('class.edit',$class->id)}}"><i
-                                                        class="bx bx-edit-alt me-1"></i>
+                                                <a class="dropdown-item"
+                                                    href="{{ route('class.show', $class->id) }}"><i
+                                                        class="bx bxs-bullseye">Show</i>
                                                     </a>
-                                                <a class="dropdown-item" href="{{route('class.update',$class->id)}}"><i
-                                                        class="bx bx-trash me-1"></i>
+                                                <a class="dropdown-item" href="{{route('class.edit',$class->id)}}"><i
+                                                        class="bx bx-edit-alt me-1">Edit</i> 
+                                                    </a>
+                                                <a class="dropdown-item" href="{{route('class.delete', $class->id) }}"><i
+                                                        class="bx bx-trash me-1">Delete</i>
                                                     </a>
                                             </div>
                                         </div>

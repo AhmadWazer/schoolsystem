@@ -27,8 +27,25 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>Dashboard - Analytics | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    
+    {{-- USE AUTH TO CHANGE TITTLE AUTOMATICALY --}}
+    <title>AIMS | 
+          @auth
+        @if(Auth::user()->role === 'admin')
+            ADMIN
+        @elseif(Auth::user()->role === 'teacher')
+            TEACHER
+        @elseif(Auth::user()->role === 'student')
+            STUDENT
+        @elseif(Auth::user()->role === 'parent')
+            PARENT
+        @else
+            Dashboard
+        @endif
+    @else
+        Dashboard
+    @endauth
+    </title>
 
     <meta name="description" content="" />
 
@@ -97,7 +114,7 @@
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-            <a href="index" class="app-brand-link" style="text-decoration:none">
+            <a href="/home" class="app-brand-link" style="text-decoration:none">
               <span class="app-brand-logo demo">
                 <svg
                   width="25"
@@ -248,9 +265,11 @@
               <a href="/student/datesheet" class="menu-link" style="text-decoration:none">
                 <!-- <i class="menu-icon tf-icons bx bx-home-circle"></i> -->
                 <div data-i18n="Analytics">Notification</div>
-                <i class='ms-4 bx bxs-time-five blink-menu'></i>
+                <i class='ms-4 bx bxs-time-five blink-menu '></i>
               </a>
             </li>
+            <!-- new code for blinking clock icon -->
+            <!-- new code for blinking clock icon -->
             @endif
             @if(Auth::user()->role == 'teacher')
             <!-- Dashboard -->
@@ -275,7 +294,7 @@
               </a>
             </li>
             @endif
-            @if(Auth::user()->role == 'parant')
+            @if(Auth::user()->role == 'parent')
             <!-- Dashboard -->
             <li class="menu-item active">
               <a href="/home" class="menu-link" style="text-decoration:none">
@@ -319,6 +338,10 @@
               
               <ul class="navbar-nav flex-row align-items-center ms-auto">
                 <!-- Place this tag where you want the button to render. -->
+                <li class="nav-item lh-1 me-3">
+                  <a><i class='bx  bxs-bell-ring'></i>
+                  </a> 
+                </li>
                 <li class="nav-item lh-1 me-3">
                   <a><strong> {{ ucfirst(Auth::user()->role) }}</strong></a>
                 </li>

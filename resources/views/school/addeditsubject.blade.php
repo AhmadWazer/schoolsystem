@@ -40,13 +40,19 @@
                                     {{@$sdata->s_description}}</textarea>
                             </div>
                         </div>
+                        <!-- get all teachers -->
                         <div class="mb-3">
-                            <label class="form-label" for="basic-icon-default-phone">Assign Teacher</label>
+                            <label class="form-label">Assign Teacher</label>
                             <div class="input-group input-group-merge">
-                                <select name="assign_teacher" id="abc" class="form-control phone-mask">
-                                    <option value="{{@$sdata->assign_teacher}}">
-                                    {{@$sdata->assign_teacher}}</option>
-                                    
+                                <select name="assign_teacher" class="form-control">
+                                    <!-- <option value="">-- Select Teacher --</option> -->
+                                     <option value="">{{@$sdata->teacher_name}}</option>
+                                     @foreach($teachers as $teacher)
+                                    <option value="{{ $teacher->id }}"
+                                        {{ isset($cdata) && $cdata->assign_teacher == $teacher->id ? 'selected' : '' }}>
+                                        {{ $teacher->name }}
+                                    </option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>

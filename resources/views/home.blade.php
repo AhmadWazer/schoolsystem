@@ -1,8 +1,12 @@
 <x-sidebar />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 <!-- Content wrapper -->
-
-@if(Auth::user()->role == 'admin')
+<style>
+    .hover-text:hover {
+      color: #0051d3ff;
+    }
+  </style>
+@if(Auth::user()->role== 'admin')
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class=" col-12">
             <div class="row">
@@ -12,15 +16,17 @@
                             <div class="card-title d-flex align-items-start justify-content-between">
                                 <!-- <div class="avatar flex-shrink-0"> -->
                                 <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 rounded"
-                                    style="width:40px">
+                                    style="width:60px">
                                     <i class="bi bi-person-fill"></i>
                                     <!-- <img src="../assets/img/icons/unicons/chart-success.png" alt="chart success"
                                     class="rounded" /> -->
                                 </div>
-                                <a class="dropdown-item-end btn" type="button" href="/student"> View</a>
+                                <a class="dropdown-item-end btn hover-text" type="button" href="/student"> View</a>
                             </div>
-                            <span class="fw-semibold d-block mb-1">Students</span>
-                            <h3 class="card-title mb-2">{{ count($show) }}</h3>
+                            <div class="d-flex justify-content-between align-items-center mt-4">
+                                <span class="fw-semibold fs-3"><strong>Students</strong></span>
+                                <h3 class="card-title mb-0"><strong>{{ count($show) }}</strong></h3>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -29,15 +35,17 @@
                         <div class="card-body">
                             <div class="card-title d-flex align-items-start justify-content-between">
                                 <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 rounded"
-                                    style="width:40px">
+                                    style="width:60px">
                                     <i class="bi bi-person-bounding-box"></i>
                                     <!-- <img src="../assets/img/icons/unicons/wallet-info.png" alt="Credit Card"
                                     class="rounded" /> -->
                                 </div>
-                                <a class="dropdown-item-end btn" type="button" href="/teacher"> View</a>
+                                <a class="dropdown-item-end hover-text btn" type="button" href="/teacher"> View</a>
                             </div>
-                            <span class="fw-semibold d-block mb-1">Teachers</span>
-                            <h3 class="card-title text-nowrap mb-1">{{ count($teach) }}</h3>
+                            <div class="d-flex justify-content-between align-items-center mt-4">
+                                <span class="fw-semibold fs-3"><strong>Teachers</strong></span>
+                                <h3 class="card-title mb-0"><strong>{{ count($teach) }}</strong></h3>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -46,14 +54,16 @@
                         <div class="card-body">
                             <div class="card-title d-flex align-items-start justify-content-between">
                                 <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 rounded"
-                                    style="width:40px">
+                                    style="width:60px">
                                     <i class="bi bi-book"></i>
                                     <!-- <img src="../assets/img/icons/unicons/paypal.png" alt="Credit Card" class="rounded" /> -->
                                 </div>
-                                <a class="dropdown-item-end btn" type="button" href="/subject"> View</a>
+                                <a class="dropdown-item-end hover-text btn" type="button" href="/subject"> View</a>
                             </div>
-                            <span class="fw-semibold d-block mb-1">Subjects</span>
-                            <h3 class="card-title text-nowrap mb-2">{{ count($sub) }}</h3>
+                            <div class="d-flex justify-content-between align-items-center mt-4">
+                                <span class="fw-semibold fs-3"><strong>Subjects</strong></span>
+                                <h3 class="card-title mb-0"><strong>{{ count($sub) }}</strong></h3>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -62,15 +72,17 @@
                         <div class="card-body">
                             <div class="card-title d-flex align-items-start justify-content-between">
                                 <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 rounded"
-                                    style="width:40px">
+                                    style="width:60px">
                                     <i class="bi bi-justify-left"></i>
                                     <!-- <img src="../assets/img/icons/unicons/cc-primary.png" alt="Credit Card"
                                     class="rounded" /> -->
                                 </div>
-                                <a class="dropdown-item-end btn" type="button" href="/class"> View</a>
+                                <a class="dropdown-item-end hover-text btn" type="button" href="/class"> View</a>
                             </div>
-                            <span class="fw-semibold d-block mb-1">Classes</span>
-                            <h3 class="card-title mb-2">{{ count($class) }}</h3>
+                            <div class="d-flex justify-content-between align-items-center mt-4">
+                                <span class="fw-semibold fs-3"><strong>Classes</strong></span>
+                                <h3 class="card-title mb-0"><strong>{{ count($class) }}</strong></h3>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -83,15 +95,17 @@
                         <div class="card-body">
                             <div class="card-title d-flex align-items-start justify-content-between">
                                 <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 rounded"
-                                    style="width:40px">
+                                    style="width:60px">
                                     <i class="bi bi-person-circle"></i>
                                     <!-- <img src="../assets/img/icons/unicons/cc-primary.png" alt="Credit Card" 
                                     class="rounded" />-->
                                 </div>
-                                <a class="dropdown-item-end btn" type="button" href="/parent"> View</a>
+                                <a class="dropdown-item-end hover-text btn" type="button" href="/parent"> View</a>
                             </div>
-                            <span class="fw-semibold d-block mb-1">Parents</span>
-                            <h3 class="card-title mb-2">{{ count($parent) }}</h3>
+                            <div class="d-flex justify-content-between align-items-center mt-4">
+                                <span class="fw-semibold fs-3"><strong>Parents</strong></span>
+                                <h3 class="card-title mb-0"><strong>{{ count($parent) }}</strong></h3>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -370,15 +384,15 @@
     
 @endif
 
-@if(Auth::user()->role == 'parant')
+@if(Auth::user()->role == 'parent')
 
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="clo-12">
             <div class="row">
                 <div class="col-4"></div>
-                <div class=" col-5 mb-4">
-
-                    <div class="card ">
+                <!-- <div class=" col-5 mb-4"> -->
+                    <div class="col-md-4 col-sm-6 mb-3">
+                    <div class="card shadow-lg">
                         <div class="card-header">Total Childrens</div>
                         @php
                             $child = explode(',',Auth::user()->id);
@@ -386,9 +400,9 @@
                             ->whereIn('student_parent',$child)->get();
                             $childsum = count($pchild);
                         @endphp
-                        <div class="card-body">
-                            <h2>Childrens: {{ $childsum }}</h2>
-                            <div class="d-flex">
+                        <div class="card-body text-center">
+                            <h2><strong>Childrens:</strong> {{ $childsum }}</h2>
+                            <div class="d-flex justify-content-center">
                                 <!-- select student to desplay ther details -->
                             <select class="btn btn-success ms-3" name="" id="pChild">
                                 <option value="">ShowStudent</option>
@@ -407,9 +421,9 @@
                         </div>
                     </div>
                 </div>
-                            </div>
-                            </div>
-                            </div>
+            </div>
+        </div>
+    </div>
                             <!-- student details -->
     <div class="col-12"  id="studentData">
      <!-- students details display here -->
@@ -417,24 +431,24 @@
 <!-- attendance -->
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="clo-12" >
-                    <div class="card pb-3" >
+            <div class="card pb-3" >
                 <div class="card-header">
                     Student Attendance
                 </div>
-                        <div class="table-responsive text-nowrap pt-3">
-                            <table class="table ">
-                                <thead>
-                                    <tr>
-                                        <th>Date</th>
-                                        <th>Class</th>
-                                        <th>Teacher</th>
-                                        <th>Attendance</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="table-border-bottom-0" id="studentAttend">
-                                    
-                                </tbody>
-                            </table>
+                <div class="table-responsive text-center text-nowrap pt-3">
+                    <table class="table ">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Class</th>
+                                <th>Subject</th>
+                                <th>Teacher</th>
+                                <th>Attendance</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-border-bottom-0" id="studentAttend">
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -465,7 +479,7 @@
 
                     $.each(data, function (index, student) {
                         var newRow = `
-                        <div class="container mt-4 ">
+        <div class="container mt-4 ">
             <div class="card">
                 <div class="card-header">
                     Student Details
@@ -486,8 +500,8 @@
                     <h5 class="card-title"><strong>Student Parent:</strong>  ${student.parent_name} </h5>
                     <h5 class="card-title"><strong>Student Image:</strong>  ${student.image} </h5>
                 </div>
-                </div>
-                </div>`;
+            </div>
+        </div>`;
                         
                         tableBody.append(newRow);
                     });
@@ -505,7 +519,7 @@ $(document).ready(function(){
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                url: '/studAttendanceA', // Update the URL to your search endpoint
+                url: '/studAttendanceP', // Update the URL to your search endpoint
                 method: 'post',
                 data: {
                     attend: attend
@@ -521,6 +535,7 @@ $(document).ready(function(){
                                     <td><i class="fab fa-angular fa-lg text-danger me-3"></i>
                                         <strong>${studentAttendance.attend_date}</strong></td>
                                     <td>${studentAttendance.class_name}</td>
+                                    <td>${studentAttendance.subject_name}</td>
                                     <td>${studentAttendance.teacher_name}</td>
                                     <td style="color: ${studentAttendance.attend === 'prasent' ? 'green' : 'red'}">${studentAttendance.attend}</td>
                                 </tr>`;

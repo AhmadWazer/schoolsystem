@@ -51,13 +51,13 @@
                             <div class="input-group input-group-merge">
                                 <div class="btn-group" name="gender" role="group"
                                     aria-label="Basic radio toggle button group">
-                                    <input type="radio" class="btn-check" name="btnradio" id="btnradio1" value="male"
+                                    <input type="radio" class="btn-check" name="btnradio" id="btnradio1" value="m"
                                         autocomplete="off"{{@$pdata->gender == 'male'? 'checked' : ''}} />
                                     <label class="btn btn-outline-primary" for="btnradio1">Male</label>
-                                    <input type="radio" class="btn-check" name="btnradio" id="btnradio2" value="female"
+                                    <input type="radio" class="btn-check" name="btnradio" id="btnradio2" value="f"
                                         autocomplete="off" {{@$pdata->gender == 'female'? 'checked' : ''}} />
                                     <label class="btn btn-outline-primary" for="btnradio2">Female</label>
-                                    <input type="radio" class="btn-check" name="btnradio" id="btnradio3" value="others"
+                                    <input type="radio" class="btn-check" name="btnradio" id="btnradio3" value="o"
                                         autocomplete="off" {{@$pdata->gender == 'others'? 'checked' : ''}}/>
                                     <label class="btn btn-outline-primary" for="btnradio3">Others</label>
                                 </div>

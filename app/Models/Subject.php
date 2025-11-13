@@ -11,6 +11,7 @@ use App\Models\Subjent;
 class Subject extends Model
 {
     use HasFactory;
+    protected $table = 'subjects';
     protected $fillable = [
         's_name',
         's_code',
@@ -18,4 +19,18 @@ class Subject extends Model
         'assign_teacher'
     ];
 
+//   public function teacher()
+// {
+//     return $this->belongsTo(User::class, 'assign_teacher');
+// }
+// Attendance
+ public function teacher()
+    {
+        return $this->belongsTo(User::class, 'assign_teacher');
+    }
+
+    public function class()
+    {
+        return $this->belongsTo(Classes::class, 'class_id');
+    }
 }

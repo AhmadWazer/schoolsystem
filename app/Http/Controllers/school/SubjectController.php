@@ -4,21 +4,26 @@ namespace App\Http\Controllers\school;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Teacher;
 use App\Models\Subject;
+use App\Models\User;
 use DB;
 
 class SubjectController extends Controller
 {
     public function subject()
     {
-        $value = Subject::get();
-        return view('school.subject')->with('value',$value);
+        // $value = Subject::get();    
+        $value = Subject::with('teacher')->get();
+        $teachers = User::where('role', '=', 'teacher')->get();
+        return view('school.subject', compact('value', 'teachers'));
+           
+        // return view('school.subject')->with('value',$value);
     }
     public function addeditsubject()
     {
-        // $tdata = Teacher::get();
-        return view('school.addeditsubject');
+        $teachers = User::where('role', '=', 'teacher')->get();
+        return view('school.addeditsubject', compact('teachers'));
+        // return view('school.addeditsubject');
     }
     public function store(Request $request)
     {
@@ -32,9 +37,12 @@ class SubjectController extends Controller
     }
     public function edit($id)
     {
-        // $tdata = Teacher::get();
+        $teachers = User::where('role', '=', 'teacher')->get();
         $sdata = Subject::findOrFail($id);
-        return view('school.addeditsubject')->with('sdata',$sdata);
+        $teach = User::where('id', $sdata->assign_teacher)->first();
+        $sdata->teacher_name = $teach ? $teach->name : 'No Teacher Assigned';
+
+        return view('school.addeditsubject')->with('sdata',$sdata)->with('teachers',$teachers);
     }
     public function update(Request $request, $id)
     {
@@ -49,8 +57,8 @@ class SubjectController extends Controller
     }
     public function delete($id)
     {
-        Subject::destory($id);
+        Subject::destroy($id);
         
-        return redirect('subject');
+        return redirect('subject'); 
     }
 }

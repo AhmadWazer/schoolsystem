@@ -39,16 +39,22 @@
                                     {{@$cdata->c_description}}</textarea>
                             </div>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label" for="basic-icon-default-phone">Assign Teacher</label>
+                        <!-- all subjects -->
+                        <!-- this code get all teachers in option -->
+                        <!-- <div class="mb-3">
+                            <label class="form-label">Assign Teacher</label>
                             <div class="input-group input-group-merge">
-                                <select name="assign_teacher" id="abc" class="form-control phone-mask">
-                                    <option value="{{@$cdata->assign_teacher}}">
-                                    {{@$cdata->assign_teacher}}</option>
-                                   
+                                <select name="assign_teacher" class="form-control">
+                                    <option value="">-- Select Teacher --</option>
+                                     @foreach($teachers as $teacher)
+                                    <option value="{{ $teacher->id }}"
+                                        {{ isset($cdata) && $cdata->assign_teacher == $teacher->id ? 'selected' : '' }}>
+                                        {{ $teacher->name }}
+                                    </option>
+                                    @endforeach
                                 </select>
                             </div>
-                        </div>
+                        </div> -->
                         <button type="submit" class="btn btn-primary">Save</button>
                         <a href="/class" type="button" class="btn btn-dark">Back</a>
                     </form>

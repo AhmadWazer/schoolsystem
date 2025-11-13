@@ -77,4 +77,7 @@
         </main>
     </div>
 </body>
+<!-- script code for blinking the clock icon -->
+
+<!-- script code for blinking the clock icon -->
 </html>

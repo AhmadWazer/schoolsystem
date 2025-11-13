@@ -14,8 +14,8 @@
                 <div class="col-2 mb-4">
                     <div class="input-group flex-nowrap">
                         <span class="input-group-text bg-info" id="addon-wrapping">Date</span>
-                        <input type="date" name="date" class="form-control" placeholder="Class" aria-label="Username"
-                            aria-describedby="addon-wrapping" required>
+                            <input type="date" name="date" class="form-control" value="{{ date('Y-m-d') }}" placeholder="Class" 
+                                   aria-label="Username" aria-describedby="addon-wrapping" readonly >
                     </div>
                 </div>
             <div class="card">
@@ -25,7 +25,7 @@
                 @endphp
                 @foreach($classn as $clas)
                     <input type="hidden" name="class" value="{{ $clas->id }}" />
-                    <h5 class="card-header">{{ $clas->c_name }}</h5>
+                    <h5 class="card-header"><strong>Class Name: </strong>{{ $clas->c_name }}</h5>
                 @endforeach
                 <div class="table-responsive text-nowrap">
                     <table class="table">
@@ -66,7 +66,7 @@
                                     @foreach($stdsubject as $subject)
                                         <!-- (Auth::user()->role == 'teacher' && in_array($subject->id, explode(',', Auth::user()->assign_subject))) -->
                                         @if(Auth::user()->role == 'teacher' && in_array($subject->id, explode(',', Auth::user()->assign_subject)))
-                                            <input type="hidden" name="subject" value="{{ $subject->s_code }}" />
+                                            <input type="hidden" name="subject" value="{{ $subject->id }}" />
                                             <td>{{ $subject->s_code }} </td>
                                         @endif
                                     @endforeach
@@ -90,6 +90,22 @@
                     </table>
                 </div>
             </div>
+                <!-- success and error alert message for Attendance -->
+                                      {{-- Success Message --}}
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+                                         {{-- Error Message --}}
+                @if (session('error'))
+                    <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                        {{ session('error') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+                <!-- success and error alert message for Attendance -->
             <div class="mt-2">
                 <button type="submit" class="btn btn-primary send-btn">Save</button>
                 <a href="/home" type="button" class="btn btn-dark">Back</a>

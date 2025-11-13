@@ -1,57 +1,60 @@
 <x-sidebar />
 <!-- Content wrapper -->
 <div class="content-wrapper">
-    <!-- Content -->
-
     <div class="container mt-3 ms-2">
         @php
             $className = DB::table('classes')->get();
             $subjectName = DB::table('subjects')->get();
         @endphp
-        <h3> Attendance</h3>
-        <div class=" col-12 d-flex ms-5 mt-3">
-            <!-- search by class -->
+
+        <h3>Attendance</h3>
+
+        <div class="col-12 d-flex ms-5 mt-3">
+            <!-- Search by Class -->
             <div class="col-2 ms-3">
                 <div class="input-group flex-nowrap">
-                    <span class="input-group-text bg-info" id="addon-wrapping">CName</span>
-                    <select class="form-control" name="" id="selectClass">
+                    <span class="input-group-text bg-info">Class</span>
+                    <select class="form-control" id="selectClass">
                         <option value="">ClassName</option>
                         @foreach($className as $name)
-                            <option id="abc" value="{{ $name->id }}">{{ $name->c_name }}</option>
+                            <option value="{{ $name->id }}">{{ $name->c_name }}</option>
                         @endforeach
                     </select>
                 </div>
             </div>
-            <!-- search by subject -->
+
+            <!-- Search by Subject -->
             <div class="col-2 ms-5">
                 <div class="input-group flex-nowrap">
-                    <span class="input-group-text bg-info" id="addon-wrapping">SName</span>
-                    <select class="form-control" name="" id="selectSubject">
+                    <span class="input-group-text bg-info">Subject</span>
+                    <select class="form-control" id="selectSubject">
                         <option value="">SubjectName</option>
                         @foreach($subjectName as $name)
-                            <option id="" value="{{ $name->s_code }}">{{ $name->s_name }}</option>
+                            <option value="{{ $name->id }}">{{ $name->s_name }}</option>
                         @endforeach
                     </select>
                 </div>
             </div>
-            <!-- search by date -->
+
+            <!-- Search by Date -->
             <div class="col-2 ms-5">
                 <div class="input-group flex-nowrap">
-                    <span class="input-group-text bg-info" id="addon-wrapping">Date</span>
-                    <input type="date" id="selectDate" class="form-control" placeholder="Class"
-                        aria-label="Username" aria-describedby="addon-wrapping">
+                    <span class="input-group-text bg-info">Date</span>
+                    <input type="date" id="selectDate" class="form-control">
                 </div>
             </div>
+
+            <!-- Search Button -->
             <div class="col-2 ms-5">
                 <div class="input-group flex-nowrap">
-                    <button name="searchBtn" id="searchAttendanceBtn" class="form-control bg-info">Search</button>
+                    <button id="searchAttendanceBtn" class="form-control bg-info text-white">Search</button>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Content -->
+
+    <!-- Table Section -->
     <div class="container-xxl flex-grow-1 container-p-y">
-        <!-- Basic Bootstrap Table -->
         <div class="card">
             <h5 class="card-header">Attendance</h5>
             <div class="table-responsive text-nowrap">
@@ -66,16 +69,9 @@
                             <th>Attendance</th>
                         </tr>
                     </thead>
-                    <tbody  class="table-border-bottom-0">
+                    <tbody class="table-border-bottom-0">
                         <tr>
-                            <td><i class="fab fa-angular fa-lg text-danger me-3"></i>
-                                <strong>10\11\2023</strong>
-                            </td>
-                            <td>Student1</td>
-                            <td>Class1</td>
-                            <td>001</td>
-                            <td>Wazir Ahmad</td>
-                            <td>P or A </td>
+                            <td colspan="6" class="text-center text-muted">No data found</td>
                         </tr>
                     </tbody>
                 </table>
@@ -83,143 +79,99 @@
         </div>
     </div>
 </div>
+
+<!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<!-- search by class -->
-<!-- <script>
-    $(document).ready(function () {
-        // Your existing code
 
-        // Add a click event for the search button
-        $("#selectClass").on('change', function (e) {
-            e.preventDefault();
-            let selectedClass = $(this).val();
-
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                url: '/cattendance', // Update the URL to your search endpoint
-                method: 'post',
-                data: {
-                    selectedClass: selectedClass
-                },
-                success: function (data) {
-                    // Get the table body
-                    var tableBody = $('#tableAttnd').find('tbody');
-                    tableBody.empty();  // Clear existing rows
-
-                    $.each(data, function (index, attendance) {
-                        var newRow = `
-                            <tr>
-                                <td>${attendance.attend_date}</td>
-                                <td>${attendance.student_name}</td>
-                                <td>${attendance.subject_id}</td>
-                                <td>${attendance.teacher_name}</td>
-                                <td>${attendance.attend}</td>
-                            </tr>
-                        `;
-                        tableBody.append(newRow);
-                    });
-                },
-                error: function (xhr, status, error) {
-                    console.error("Error: " + status + "\nMessage: " + error);
-                }
-            });
-        });
-    });
-</script> -->
-<!-- search by subject -->
+<!-- Combined & Cleaned AJAX Scripts -->
 <script>
-    $(document).ready(function () {
-        // Your existing code
+$(document).ready(function () {
 
-        // Add a click event for the search button
-        $("#selectSubject").on('change', function (e) {
-            e.preventDefault();
-            let selectedSubject = $(this).val();
+    // ✅ Helper function to show N/A if value missing
+    function safeValue(value) {
+        return value ? value : 'N/A';
+    }
 
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                url: '/subAttendance', // Update the URL to your search endpoint
-                method: 'post',
-                data: {
-                    selectedSubject: selectedSubject
-                },
-                success: function (data) {
-                    // Get the table body
-                    var tableBody = $('#tableAttnd').find('tbody');
-                    tableBody.empty();  // Clear existing rows
+    // ✅ Function to update table
+    function updateTable(data) {
+        var tableBody = $('#tableAttnd tbody');
+        tableBody.empty();
 
-                    $.each(data, function (index, attendance) {
-                        var newRow = `
-                            <tr>
-                                <td>${attendance.attend_date}</td>
-                                <td>${attendance.student_name}</td>
-                                <td>${attendance.class_name}</td>
-                                <td>${attendance.subject_id}</td>
-                                <td>${attendance.teacher_name}</td>
-                                <td style="color: ${attendance.attend === 'prasent' ? 'green' : 'red'}">${attendance.attend}</td>
-                            </tr>
-                        `;
-                        tableBody.append(newRow);
-                    });
-                },
-                error: function (xhr, status, error) {
-                    console.error("Error: " + status + "\nMessage: " + error);
-                }
-            });
+        if (data.length === 0) {
+            tableBody.append('<tr><td colspan="6" class="text-center text-muted">No records found</td></tr>');
+            return;
+        }
+
+        $.each(data, function (index, attendance) {
+            var newRow = `
+                <tr>
+                    <td>${safeValue(attendance.attend_date)}</td>
+                    <td>${safeValue(attendance.student_name)}</td>
+                    <td>${safeValue(attendance.class_name)}</td>
+                    <td>${safeValue(attendance.subject_name)}</td>
+                    <td>${safeValue(attendance.teacher_name)}</td>
+                    <td style="color: ${attendance.attend === 'prasent' ? 'green' : 'red'}">
+                        ${safeValue(attendance.attend)}
+                    </td>
+                </tr>
+            `;
+            tableBody.append(newRow);
+        });
+    }
+
+    //  Search by Class
+    // $('#selectClass').on('change', function (e) {
+    //     e.preventDefault();
+    //     let selectedClass = $(this).val();
+
+    //     $.ajax({
+    //         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+    //         url: '/cattendance',
+    //         method: 'POST',
+    //         data: { selectedClass: selectedClass },
+    //         success: updateTable,
+    //         error: function (xhr, status, error) {
+    //             console.error("Error:", error);
+    //         }
+    //     });
+    // });
+
+    // Search by Subject
+    // $('#selectSubject').on('change', function (e) {
+    //     e.preventDefault();
+    //     let selectedSubject = $(this).val();
+    // // console.log("Selected Subject ID:", selectedSubject); // ✅ Check value
+
+    //     $.ajax({
+    //         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+    //         url: '/subAttendance',
+    //         method: 'POST',
+    //         data: { selectedSubject: selectedSubject },
+    //         success: updateTable,
+    //         error: function (xhr, status, error) {
+    //             console.error("Error:", error);
+    //         }
+    //     });
+    // });
+
+    // Search by Class, Subject, and Date (with class filter)
+    $('#searchAttendanceBtn').on('click', function (e) {
+        e.preventDefault();
+        let selectedDate = $('#selectDate').val();
+        let selectedClass = $('#selectClass').val();
+        let selectedSubject = $('#selectSubject').val();
+
+        $.ajax({
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            url: '/searchAttendance',
+            method: 'POST',
+            data: { selectedDate: selectedDate, selectedClass: selectedClass, selectedSubject: selectedSubject },
+            success: updateTable,
+            error: function (xhr, status, error) {
+                console.error("Error:", error);
+            }
         });
     });
-</script>
-<!-- search by date -->
-<script>
-    $(document).ready(function () {
-        // Your existing code
-
-        // Add a click event for the search button
-        $("#searchAttendanceBtn").on('click', function (e) {
-            e.preventDefault();
-            let selectedDate = $("#selectDate").val();
-            let selectClass = $("#selectClass").val();
-            // let selectedSubject = $("#selectedSubject").val();
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                url: '/searchAttendance', // Update the URL to your search endpoint
-                method: 'post',
-                data: {
-                    selectedDate: selectedDate,
-                    selectClass: selectClass
-                    // selectedSubject: selectedSubject
-                },
-
-                success: function (data) {
-                    // Get the table body
-                    var tableBody = $('#tableAttnd').find('tbody');
-                    tableBody.empty();  // Clear existing rows
-
-                    $.each(data, function (index, attendance) {
-                        var newRow = `
-                            <tr>
-                                <td>${attendance.attend_date}</td>
-                                <td>${attendance.student_name}</td>
-                                <td>${attendance.class_name}</td>
-                                <td>${attendance.subject_id}</td>
-                                <td>${attendance.teacher_name}</td>
-                                <td style="color: ${attendance.attend === 'prasent' ? 'green' : 'red'}">${attendance.attend}</td>
-                            </tr>
-                        `;
-                        tableBody.append(newRow);
-                    });
-                },
-                error: function (xhr, status, error) {
-                    console.error("Error: " + status + "\nMessage: " + error);
-                }
-            });
-        });
-    });
+});
 </script>
 <x-footer />

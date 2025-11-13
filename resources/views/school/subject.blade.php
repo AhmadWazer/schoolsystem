@@ -27,33 +27,24 @@
                     @foreach($value as $sub)
                         <tbody class="table-border-bottom-0">
                             <tr>
-                                <td><i class="fab fa-angular fa-lg text-danger me-3"></i>
-                                    <strong>{{ $sub->s_name }}</strong>
-                                </td>
+                                <td><strong>{{ $sub->s_name }}</strong></td>
                                 <td>{{ $sub->s_code }}</td>
-                                
-                    @php
-                    $subj = explode(',', $sub->id);
-                    $sum = count($subj);
-                    $data = DB::table('users')->where('assign_subject',$subj)->value('name');
-                    
-                    @endphp
-                                <td>{{$data}}</td>
-                                <td> {{ $sub->s_description }}</td>
+                                <td>{{ $sub->teacher ? $sub->teacher->name : 'No Teacher Assigned' }}</td>
+                                <td>{{ $sub->s_description }}</td>
                                 <td>
-                                    <div class="dropdown">
+                                     <div class="dropdown">
                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
                                             data-bs-toggle="dropdown">
                                             <i class="bx bx-dots-vertical-rounded"></i>
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
                                             <div class="d-flex">
-                                                <a class="dropdown-item" href="{{route('subject.edit', $sub->id)}}"><i
-                                                        class="bx bx-edit-alt me-1"></i>
-                                                    Edit</a>
-                                                <a class="dropdown-item" href="{{route('subject.delete', $sub->id)}}"><i
-                                                        class="bx bx-trash me-1"></i>
-                                                    Delete</a>
+                                                <a class="dropdown-item" href="{{route('subject.edit', $sub->id) }}"><i
+                                                        class="bx bx-edit-alt me-1">Edit</i> 
+                                                    </a>
+                                                <a class="dropdown-item" href="{{route('subject.delete', $sub->id) }}"><i
+                                                        class="bx bx-trash me-1">Delete</i>
+                                                    </a>
                                             </div>
                                         </div>
                                     </div>
@@ -65,9 +56,6 @@
             </div>
         </div>
         <!--/ Basic Bootstrap Table -->
-
-
-        <!--  -->
     </div>
 </div>
 <x-footer />

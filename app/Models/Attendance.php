@@ -17,4 +17,25 @@ class Attendance extends Model
 'attend',
 'attend_date'
     ];
+    //attendance
+     public function class()
+    {
+        return $this->belongsTo(Classes::class, 'class_id');
+    }
+
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class, 'subject_id');
+    }
+
+    public function teacher()
+    {
+        return $this->belongsTo(User::class, 'teacher_id');
+    }
+
+    public function student()
+    {
+        return $this->belongsTo(User::class, 'student_id');
+    }
+
 }

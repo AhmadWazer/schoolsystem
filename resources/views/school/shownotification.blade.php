@@ -12,7 +12,7 @@
                 <h5 class="card-title"><strong style="color:blue">Class_id:</strong> {{ $value->c_name }} </h5>
                 <h5 class="card-title"><strong style="color:blue">Subject_id:</strong> {{ $value->s_name }}</h5>
                 <h5 class="card-title"><strong style="color:blue">Teacher_id:</strong> {{ $value->name }} </h5>
-                <!-- <h5 class="card-title"><strong style="color:blue">Date:</strong> {{ $value->date }}</h5> -->
+                <h5 class="card-title"><strong style="color:blue">Date:</strong> {{ $value->date }}</h5>
                 <h5 class="card-title strtTime" id="strtTime"><strong style="color:blue">Start_time:</strong>
                     {{ $value->start_time }}</h5>
                 <h5 class="card-title endTime" id="endTime"><strong style="color:blue">End_time:</strong>
